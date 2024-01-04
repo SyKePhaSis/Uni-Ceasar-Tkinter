@@ -16,10 +16,10 @@ from tkinter import messagebox
 import string
 
 CHAR = [
-    "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρσςτυφχψω", #ALPHABET_GR
+    "ΑΆΒΓΔΕΈΖΗΉΘΙΊΪΚΛΜΝΞΟΌΠΡΣΤΥΎΫΦΧΨΩαάβγδεέζηήθιίϊΐκλμνξοόπρσςτυύϋΰφχψώ", #ALPHABET_GR
     string.ascii_letters, # APLHABET_EN
     string.digits, #DIGITS
-    string.punctuation, #SYMBOLS
+    string.punctuation + "«»", #SYMBOLS
     " " #WhiteSpace
 ]
 
@@ -126,10 +126,9 @@ class Graphics():
 
         #Creting Settings Menu
         settings_menu = tk.Menu()
-        settings_menu.add_checkbutton
         settings_menu.add_checkbutton(label="Greek", onvalue = 1, offvalue = 0, variable=self.list_settings[0], command = self._manage_character_list)
         settings_menu.add_checkbutton(label="English",onvalue = 1, offvalue = 0, variable=self.list_settings[1], command = self._manage_character_list)
-        settings_menu.add_checkbutton(label="Digit", onvalue = 1, offvalue = 0, variable=self.list_settings[2], command = self._manage_character_list)
+        settings_menu.add_checkbutton(label="Digits", onvalue = 1, offvalue = 0, variable=self.list_settings[2], command = self._manage_character_list)
         settings_menu.add_checkbutton(label="Symbols", onvalue = 1, offvalue = 0, variable=self.list_settings[3], command = self._manage_character_list)
         settings_menu.add_checkbutton(label="Whitespace", onvalue = 1, offvalue = 0, variable=self.list_settings[4], command = self._manage_character_list)
 
@@ -140,9 +139,6 @@ class Graphics():
         #Adding Menu to Bar
         menubar.add_cascade(menu=settings_menu, label="List Settings")
         menubar.add_cascade(menu=mode_menu, label = "Mode")
-
-    def _set_mode():
-        pass
 
     def _manage_character_list(self):
         self.list = ""
@@ -179,7 +175,7 @@ class Graphics():
                         self._throw_error(f"Error: Symbol {i} couldn't found in the current character list, with unicode number {ord(i)}.\n Note: This character will be replaced with a whitespace.")
                         encrypted += " "
                         continue
-                    encrypted += self.list[(index + int(shift) % len(self.list)) % len(self.list)]
+                    encrypted += self.list[(index + int(shift)) % len(self.list)]
                 else:
                     encrypted += chr((ord(i) + int(shift)) % UNICODE_BOUND)
                 self.result.delete("1.0", tk.END)
@@ -200,7 +196,7 @@ class Graphics():
                             self._throw_error(f"Error: Symbol {i} couldn't found in the current character list, with unicode number {ord(i)}.\n Note: This character will be replaced with a whitespace.")
                             decrypted += " "
                             continue
-                        decrypted += self.list[(index - int(shift) % len(self.list)) % len(self.list)]
+                        decrypted += self.list[(index - int(shift)) % len(self.list)]
                     else:
                         decrypted += chr((ord(i) - int(shift)) % UNICODE_BOUND)
                     self.result.delete("1.0", tk.END)
