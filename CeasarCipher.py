@@ -44,7 +44,7 @@ class Graphics():
 
     def __init__(self):
         self.w = tk.Tk()
-        self.w.title("Ceasar's Cryprografy") # Θέτουμε όνομα παραθύρου
+        self.w.title("Ceasar's Cryprography") # Θέτουμε όνομα παραθύρου
         self.w.geometry("800x800") # Διαστάσεις Παραθύρο
         self.w.resizable(False, False)#Απαγορεύουμε το Resizability στον άξονα x και άξονα y
 
