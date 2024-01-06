@@ -5,7 +5,7 @@ from tkinter import messagebox
 #Lists
 import string
 
-#Λίστα διαθέσημων λιστών χαρακτήρων
+#Λίστα διαθέσιμων λιστών χαρακτήρων
 CHAR = [
     "ΑΆΒΓΔΕΈΖΗΉΘΙΊΪΚΛΜΝΞΟΌΠΡΣΤΥΎΫΦΧΨΩαάβγδεέζηήθιίϊΐκλμνξοόπρσςτυύϋΰφχψώ", #ALPHABET_GR
     string.ascii_letters, # APLHABET_EN
@@ -17,38 +17,38 @@ CHAR = [
 #Το upper_limit του unicode_mode 
 UNICODE_BOUND = 65535
 
-#Χαρακτήρες που αν συναντίσει το πρόγραμμ δεν επιρεάζει ώστε να παραμείνει το indentation ίδιο.
+#Χαρακτήρες που αν συναντήσει το πρόγραμμα δεν επηρεάζει ώστε να παραμείνει το indentation ίδιο.
 CHARACTERS_SKIP = [" ", "\t", "\n"]
 
 '''
-    Αυτή είναι η κλάση των Γραφικών και στεγάζει ολο το πρόγραμμα μας.
+    Αυτή είναι η κλάση των Γραφικών και στεγάζει όλο το πρόγραμμα μας.
     
-    Χρησιμοποιόντας το tkinter και τα functions:
+    Χρησιμοποιώντας το tkinter και τα functions:
     - _set_objects 
     - _position_objects
     - _set_bindings 
-    Kάνει spawn το window και κάνει draw τα γραφικά καθώς και 
+    Κάνει spawn το window και κάνει draw τα γραφικά καθώς και 
     bind το functionality της εφαρμογής μας.Ο λόγος του χωρισμού σε τρείς φάσεις έγινε
     για την καλύτερη κατανόηση και εύκολη ,στοχευμένη αλλαγή οπουδήποτε χρειαστεί.
 
-    Η κρυπτογράφιση και αποκρυτογράφιση γίνεται στα functions:
+    Η κρυπτογράφηση και αποκρυτογράφηση γίνεται στα functions:
     - encryption
     - decryption
     Αντίστοιχα με την χρήση των Helper Functions:
-    - _throw_error (Για την διαχείρηση των σφαλμάτων που μπορούν να εμφανιστούν) 
+    - _throw_error (Για την διαχείριση των σφαλμάτων που μπορούν να εμφανιστούν) 
     - _validate_shift (Για τον έλεγχο του αν ο χρήστης εισήγαγε σωστά στοιχεία στο πεδίο Shift)
 
-    Τέλος υπάρχει και το Info Button οπου μας δίνει μερικές πληροφορίες για το πρόγραμμα μας.
+    Τέλος, υπάρχει και το Info Button που μας δίνει μερικές πληροφορίες για το πρόγραμμα μας.
 '''
 class Graphics():
 
     def __init__(self):
         self.w = tk.Tk()
         self.w.title("Ceasar's Cryprography") # Θέτουμε όνομα παραθύρου
-        self.w.geometry("800x800") # Διαστάσεις Παραθύρο
+        self.w.geometry("800x800") # Διαστάσεις Παράθυρο
         self.w.resizable(False, False)#Απαγορεύουμε το Resizability στον άξονα x και άξονα y
 
-        # Λίστα χαρακτήρων που θα χρησιμοποιηθούν για την κρυπτογράφιση
+        # Λίστα χαρακτήρων που θα χρησιμοποιηθούν για την κρυπτογράφηση
         # Η οποία θα οριστεί στο function self._create_menubar() οταν 
         # καλεί η μέθοδος self._manage_character_list()
         self.list = ""
@@ -57,10 +57,10 @@ class Graphics():
         #λιστών χαρακτήρων που θα χρησιμοποιηθούν.
         self.list_settings = [tk.BooleanVar() for i in range(5)]
         
-        #Boolean value για το αν ειναι ενεργοποιημένο το unicode mode
+        #Boolean value για το αν είναι ενεργοποιημένο το unicode mode
         self.unicode_mode = tk.BooleanVar()
 
-        #Μέθοδοι για τη δημιουργία του γραφικού Περιβάλοντος και της λειτουργικότητας του προγράμματος
+        #Μέθοδοι για τη δημιουργία του γραφικού Περιβάλλοντος και της λειτουργικότητας του προγράμματος
         self._set_objects()
         self._position_objects()
         self._set_bindings()
@@ -72,8 +72,8 @@ class Graphics():
     def _set_objects(self):
 
         """
-            Κώδικας για την δημιουργία των πεδίων και τίτλων κρυπτογράφισης
-            (Τίτλος, Πεδίο για εισαγωγή του Shift, Πεδίο εισαγωγής text για κρυπτογράφιση, κουμπί που καλεί την διαδικασία κρυπτογράφισης) 
+            Κώδικας για τη δημιουργία των πεδίων και τίτλων κρυπτογράφησης
+            (Τίτλος, Πεδίο για εισαγωγή του Shift, Πεδίο εισαγωγής text για κρυπτογράφηση, κουμπί που καλεί την διαδικασία κρυπτογράφησης) 
         """
         self.l1 = tk.Label(self.w, text="What do you want to encrypt?:", font="Times 16")
         self.e1 = tk.Text(self.w, width=40, height=10)
@@ -82,8 +82,8 @@ class Graphics():
         self.b1 = tk.Button(self.w, text="Press to encode", command=self.encryption, bg="red", font="Times 14")
 
         """
-            Κώδικας για την δημιουργία των πεδίων και τίτλων αποκρυπτογράφισης
-            (Τίτλος, Πεδίο για εισαγωγή του Shift, Πεδίο εισαγωγής text για αποκρυπτογράφιση, κουμπί που καλεί την διαδικασία αποκρυπτογράφισης) 
+            Κώδικας για τη δημιουργία των πεδίων και τίτλων αποκρυπτογράφησης
+            (Τίτλος, Πεδίο για εισαγωγή του Shift, Πεδίο εισαγωγής text για αποκρυπτογράφηση, κουμπί που καλεί την διαδικασία αποκρυπτογράφησης) 
         """
         self.l3 = tk.Label(self.w, text="What do you want to decrypt?:", font="Times 16")
         self.e3 = tk.Text(self.w, width=40, height=10)
@@ -93,7 +93,7 @@ class Graphics():
         self.result = tk.Text(self.w, width=90, height= 10)
 
         """
-            Κουμπί που ανοίγει το παράθυρο που παρουσιάζει τις πληροφορίες για την Κρυπτογράφιση του Καίσαρα.
+            Κουμπί που ανοίγει το παράθυρο που παρουσιάζει τις πληροφορίες για την Κρυπτογράφηση του Καίσαρα.
         """
         self.just_str = tk.Label(self.w, text="Result:", font="Times 16")
         self.infobutton = tk.Button(self.w, text="Clik to learn more about Caesar cipher!", bg="yellow", font="Times 12", command=self.info_button)
@@ -117,8 +117,8 @@ class Graphics():
         self.infobutton.place(x=500,y=730)
     
     """
-        Εδω δημιουργούνται όλα τα bindings των Hover Effects των κουμπιών καθώς και binding για την
-        έξοδο απο το πρόγραμμα με την χρήση του κουμπιού <Escape>
+        Εδώ δημιουργούνται όλα τα bindings των Hover Effects των κουμπιών καθώς και binding για την
+        έξοδο από το πρόγραμμα με την χρήση του κουμπιού <Escape>
     """
     def _set_bindings(self):
         self.w.bind("<Escape>", lambda evnt: self.w.destroy())
@@ -129,7 +129,7 @@ class Graphics():
 
     """
          Με την μέθοδο αυτή κάνει Spawn το παράθυρο που παρουσιάζει μερικές πληροφορίες για την
-         κρυπτογράφιση του καίσαρα. Θέτουμε επίσης το όνομα και τις διαστάσεις του καινούργιου παραθύρου.
+         κρυπτογράφηση του καίσαρα. Θέτουμε επίσης το όνομα και τις διαστάσεις του καινούργιου παραθύρου.
     """
     def info_button(self):
         info_window=tk.Toplevel()
@@ -146,7 +146,7 @@ class Graphics():
         info_text.pack()
 
     """
-        Δημιουργεί το Menu που παρατηρείτε στο πάνο μέρος του παραθύρου καθώς και το κάθε υπομενού ξεχωριστά.
+        Δημιουργεί το Menu που παρατηρείτε στο πάνω μέρος του παραθύρου καθώς και το κάθε υπομενού ξεχωριστά.
     """
     def _create_menubar(self):
 
@@ -160,13 +160,13 @@ class Graphics():
         for x in self.list_settings:
             x.set(True)
 
-        #Δημιουργία της λίστας τών χαρακτήρων που είναι δεκτοί για κρυπτογράφιση
+        #Δημιουργία της λίστας των χαρακτήρων που είναι δεκτοί για κρυπτογράφηση
         self._manage_character_list()
 
         #Creting Settings Menu
-        #Όπου κάθε checkbutton έιναι συνδεμένο με ενα boolean value στην λίστα self.list_settings
+        #Όπου κάθε checkbutton είναι συνδεμένο με ένα boolean value στην λίστα self.list_settings
         #Επίσης κάθε φορά που παρατηρείτε αλλαγή σε κάποιο checkbutton τρέχει η μέθοδος self._manange_character_list()
-        #Ώστε να ξαναοριστεί η λίστα χαρακτήρων (self.list)
+        #Ώστε να ξανα οριστεί η λίστα χαρακτήρων (self.list)
 
         settings_menu = tk.Menu()
         settings_menu.add_checkbutton(label="Greek", onvalue = 1, offvalue = 0, variable=self.list_settings[0], command = self._manage_character_list)
@@ -188,7 +188,7 @@ class Graphics():
 
     """
         Μέθοδος που ορίζει την λίστα χαρακτήρων(self.list) κάνοντας Loop το list_settings και στην περίπτωση που
-        είναι αληθές προσθέτη την αντίστοιχη λίστα στο self.list
+        είναι αληθές προσθέτει την αντίστοιχη λίστα στο self.list
     """
     def _manage_character_list(self):
         self.list = ""
@@ -203,8 +203,8 @@ class Graphics():
         tk.messagebox.showerror("Error", text)
     
     """
-        Μέθοδος πιστοποίσης ορθότητας του Shift με την χρήση συνθικών και try-except δομή
-        Άν επιστρέψει False τότε δεν τρέχει η μέθοδος κρυπτογράφισης και αποκρυπτογράφισης
+        Μέθοδος πιστοποίησης ορθότητας του Shift με την χρήση συνθηκών και try-except δομή
+        Άν επιστρέψει False τότε δεν τρέχει η μέθοδος κρυπτογράφησης και αποκρυπτογράφησης
     """
     def _validate_shift(self, shift):
         if(shift == ''):
@@ -218,7 +218,7 @@ class Graphics():
             return False
 
     """
-        Διαδικασία κρυπτογράφισης
+        Διαδικασία κρυπτογράφησης
     """
     def encryption(self):
         encrypted = ""
@@ -230,13 +230,13 @@ class Graphics():
                 Κάνει Loop κάθε χαρακτήρα του user_string και προσθέτει στο encrypted
                 το κωδικοποιημένο character. Άν είναι enabled το unicode_mode το if statement
                 είναι ψευδές και άρα τρέχει το else. Όπου έιναι απλά κρυπτογράφιση του Καίσαρα με 
-                με character List το Unicode μεχρι το U+FFFF Οπου καθιστά ένα αρκετά πύκνο υποσύνολο 
+                με character List το Unicode μεχρι το U+FFFF όπου καθιστά ένα αρκετά πύκνο υποσύνολο 
                 του Unicode.
             """
             for i in user_string:
                 if(not self.unicode_mode.get()):
                     index = self.list.find(i)
-                    if(index == -1): # Αν δέν βρεθεί στην λίστα ο χαρακτήρας i
+                    if(index == -1): # Αν δεν βρεθεί στην λίστα ο χαρακτήρας i
                         if(i in CHARACTERS_SKIP): #Ελέγχει την περίπτωση να είναι white-space ή \n αν είναι προσθέτει τον χαρακτήρα χωρις να τον αλλάξει αλλιώς επιστρέφει error και το αντικαταστεί με white-space
                             encrypted += i
                             continue
@@ -252,9 +252,9 @@ class Graphics():
                 self.result.insert(tk.INSERT, encrypted)
 
     """
-        Διαδικασία αποκρυπτογράφισης. Η διαδικασία ειναι παρόμοια με την διαδικασία της κρυπτογράφισης οπότε
-        τα πολλά σχόλια είναι περιττά. Η μόνη διαφορα είναι οτι αντι να μετατοπίζεται προς την κατεύθυνση της κρυπτογράφισης
-        ο χαρακτήρας μας μετατοπίζεται ως προς την αντίθετη κατεύθυνση επιστρέφοντας τον μη κρυπτογραφιμένο χαρακτήρα.
+        Διαδικασία αποκρυπτογράφισης. Η διαδικασία ειναι παρόμοια με την διαδικασία της κρυπτογράφησης οπότε
+        τα πολλά σχόλια είναι περιττά. Η μόνη διαφορά είναι ότι αντί να μετατοπίζεται προς την κατεύθυνση της κρυπτογράφησης
+        ο χαρακτήρας μας μετατοπίζεται ως προς την αντίθετη κατεύθυνση επιστρέφοντας τον μη κρυπτογραφημένο χαρακτήρα.
     """
     def decryption(self):
         decrypted = ""
@@ -278,7 +278,7 @@ class Graphics():
                     self.result.insert(tk.INSERT, decrypted)
 
 """
-Όταν καλεσθέι το πρόγραμμα καλέι την κλάση και έτσι τρέχει το πρόγραμμα
+Όταν τρέξει το αρχείο καλεί την κλάση και τρέχει το πρόγραμμα δηλαδή δημιουργείτε το παράθυρο και η λειτουργία του.
 """
 if __name__ == "__main__":
     Graphics()
